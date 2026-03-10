@@ -86,42 +86,16 @@ module.exports = {
 
 /*
 NOTES TO CODE:
+Line 1 - We import the User model from the user.models.js file. This model represents the structure of the user data in our MongoDB database and provides methods for interacting with the user collection.
 
-Line 1 - We import the User model from the user.models.js file. This model represents the structure of the user data in our database and provides methods for interacting with the user collection.
+Line 3-14 - We define the fetchUsers function, which is an asynchronous function that handles the logic for fetching all users from the database. It uses the User.find() method to retrieve all user documents and sends a JSON response with the status, message, and data (the list of users). If an error occurs during this process, it catches the error and sends a JSON response with a status of 'FAILED' and an error message.
 
-Line 3 - We define an asynchronous function called fetchUsers that takes in the request and response objects as parameters. This function will be responsible for fetching the list of users from the database and sending it back in the response.
+Line 16-27 - We define the createUser function, which is an asynchronous function that handles the logic for creating a new user in the database. It extracts the name, email, and age from the request body and uses the User.create() method to create a new user document in the database. It then sends a JSON response indicating that the user was created successfully. If an error occurs, it catches the error and sends a JSON response with a status of 'FAILED' and an error message.
 
-Line 4 - We use a try-catch block to handle any potential errors that may occur during the execution of the code inside the try block.
+Line 29-50 - We define the updateUser function, which is an asynchronous function that handles the logic for updating an existing user in the database. It extracts the user ID from the request parameters and the name and age from the request body. It first checks if a user with the specified ID exists in the database using User.findById(). If the user is not found, it sends a JSON response with a status of 'FAILED' and a message indicating that the user was not found. If the user is found, it updates the user's name and age if they are provided in the request body, saves the updated user document, and sends a JSON response indicating that the user was updated successfully. If an error occurs, it catches the error and sends a JSON response with a status of 'FAILED' and an error message.
 
-Line 5 - We use the User.find() method to retrieve all users from the database. This method returns a promise that resolves to an array of user objects.
+Line 52-63 - We define the deleteUser function, which is an asynchronous function that handles the logic for deleting a user from the database. It extracts the user ID from the request parameters and uses the User.findByIdAndDelete() method to delete the user document with the specified ID from the database. It then sends a JSON response indicating that the user was deleted successfully. If an error occurs, it catches the error and sends a JSON response with a status of 'FAILED' and an error message.
 
-Line 6 - If the users are fetched successfully, we send a JSON response with a status of 'SUCCESS', a message indicating that the users were fetched successfully, and the data containing the list of users.
+Line 80-85 - We export the functions fetchUsers, createUser, updateUser, and deleteUser as an object so that they can be imported and used in other parts of the application, such as in the user.routes.js file where we will define the routes for handling user-related requests. 
 
-Line 8 - If an error occurs during the fetching of users, we catch the error and send a JSON response with a status of 'FAILED', a message indicating that something went wrong, and the error object.
-
-Line 11 - We define another asynchronous function called createUser that takes in the request and response objects as parameters. This function will be responsible for creating a new user in the database based on the data sent in the request body.
-
-Line 12 - We use destructuring to extract the name, email, and age properties from the request body.
-
-Line 13 - We use the User.create() method to create a new user in the database with the provided name, email, and age. This method returns a promise that resolves to the created user object.
-
-Line 14 - If the user is created successfully, we send a JSON response with a status of 'SUCCESS' and a message indicating that the user was created successfully.
-
-Line 16 - If an error occurs during the creation of the user, we catch the error and send a JSON response with a status of 'FAILED', a message indicating that something went wrong, and the error object.
-
-Line 19 - We define another asynchronous function called updateUser that takes in the request and response objects as parameters. This function will be responsible for updating an existing user in the database based on the data sent in the request body and the user ID provided in the request parameters.
-
-Line 20 - We use destructuring to extract the id from the request parameters and the name and age from the request body.
-
-Line 22 - We use the User.findById() method to find a user in the database by its ID. This method returns a promise that resolves to the user object if found, or null if not found.
-
-Line 23 - If no user is found with the provided ID, we send a JSON response with a status of 'FAILED' and a message indicating that the user was not found.
-
-Line 26 - If a user is found, we update its name and age properties with the new values provided in the request body.
-
-Line 28 - We call the save() method on the user object to save the updated user back to the database. This method returns a promise that resolves to the updated user object.
-
-Line 30 - If the user is updated successfully, we send a JSON response with a status of 'SUCCESS' and a message indicating that the user was updated successfully.
-
-Line 32 - If an error occurs during the updating of the user, we catch the error and send a JSON response with a status of 'FAILED', a message indicating that something went wrong, and the error object.
 */
