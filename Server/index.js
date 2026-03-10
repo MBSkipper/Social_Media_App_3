@@ -7,7 +7,10 @@ dotenv.config()
 const userRoutes = require('./src/routes/user.routes')
 
 const app = express()
-app.use('', userRoutes)
+
+app.use(express.urlencoded({ extended: false }))
+
+app.use('/users', userRoutes)
 
 app.get('/', (req, res) => {
   res.send('SocialMedApp_3.0')
@@ -16,7 +19,7 @@ app.get('/', (req, res) => {
 mongoose.connect(process.env.MONGODB_URL)
   .then(() => {
     app.listen(process.env.PORT, () => {
-      console.log('Server is running on port 4000')
+      console.log(`Server is running on port ${process.env.PORT}`)
     })
   })
 
@@ -38,13 +41,15 @@ Line 7 - We import the userRoutes from the user.routes.js file. This file contai
  
 Line 9 - We use the app.use() method to register the userRoutes middleware with our Express application. This means that any routes defined in user.routes.js will be available in our server.
 
-Line 10 - app.use('', userRoutes) - This line tells the Express application to use the userRoutes middleware for any requests that match the specified path. In this case, we are using an empty string as the path, which means that the routes defined in user.routes.js will be available at the root level of our server. For example, if we have a route defined as '/users' in user.routes.js, it will be accessible at 'http://localhost:4000/users' when we run our server.
+Line 11 - We use the express.urlencoded() middleware to parse incoming request bodies in a URL-encoded format. This allows us to access form data sent in POST requests.
 
-Line 12-14 - We define a route for the root URL ('/'). When a GET request is made to this URL, the callback function is executed, which sends the response 'SocialMedApp_3.0' back to the client.
+Line 13 - app.use('', userRoutes) - This line tells the Express application to use the userRoutes middleware for any requests that match the specified path. In this case, we are using an empty string as the path, which means that the routes defined in user.routes.js will be available at the root level of our server. For example, if we have a route defined as '/users' in user.routes.js, it will be accessible at 'http://localhost:4000/users' when we run our server.
 
-Line 16 - We use the mongoose.connect() method to establish a connection to the MongoDB database. The connection string is retrieved from the MONGODB_URL environment variable defined in the .env file.
+Line 15-17 - We define a route for the root URL ('/'). When a GET request is made to this URL, the callback function is executed, which sends the response 'SocialMedApp_3.0' back to the client.
 
-Line 16-21 - We started the server originally by calling app.listen() and specifying the port number (4000) in this code app.listen(4000, () => { }). Once the .env file was set up with the PORT variable (PORT=4000), the server would listen on that port. The callback function is executed once the server is successfully started, and it logs a message to the console indicating that the server is running.
+Line 19 - We use the mongoose.connect() method to establish a connection to the MongoDB database. The connection string is retrieved from the MONGODB_URL environment variable defined in the .env file.
+
+Line 19-24 - We started the server originally by calling app.listen() and specifying the port number (4000) in this code app.listen(4000, () => { }). Once the .env file was set up with the PORT variable (PORT=4000), the server would listen on that port. The callback function is executed once the server is successfully started, and it logs a message to the console indicating that the server is running.
 
 
  */
