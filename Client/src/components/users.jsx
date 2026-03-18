@@ -1,16 +1,28 @@
 import ListGroup from 'react-bootstrap/ListGroup';
+import { useState } from 'react';
 
 function Users() {
+  const [users, setUsers] = useState([
+    { 
+      name: 'Anne', 
+      email: 'anne@gmail.com',
+      age: 25
+    },
+    { 
+      name: 'Bob', 
+      email: 'bob@gmail.com',
+      age: 30
+    }
+  ])
+
   return (
     <>
       <h1 className='display-5'>Users</h1>
       <ListGroup>
-        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-      </ListGroup>
+        {users.map(user => (
+          <ListGroup.Item>{user.name} | {user.email} | {user.age}</ListGroup.Item>
+        ))}
+      </ListGroup> 
     </>
   );
 }
