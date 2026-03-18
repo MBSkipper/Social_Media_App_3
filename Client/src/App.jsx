@@ -4,12 +4,14 @@ import './App.css'
 import { Container } from 'react-bootstrap';  
 
 import Users from './components/Users';
+import AddUser from './components/AddUser';
 
 function App() {
 
   return (
     <Container className="mt-1">
       <Users />
+      <AddUser />
     </Container>
   )
 }

@@ -1,5 +1,8 @@
-import ListGroup from 'react-bootstrap/ListGroup';
 import { useState } from 'react';
+
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+
 
 function Users() {
   const [users, setUsers] = useState([
@@ -17,11 +20,19 @@ function Users() {
 
   return (
     <>
-      <h1 className='display-5'>Users</h1>
+      <h1 className='display-3'>Users</h1>
       <ListGroup>
         {users.map(user => (
-          <ListGroup.Item variant={user.age >= 18 ? "success" : "danger"} >
-            {user.name} | {user.email} | {user.age}</ListGroup.Item>
+          <ListGroup.Item 
+          className="d-flex justify-content-between align-items-start"
+          variant={user.age >= 18 ? "success" : "warning"} >
+            <span>{user.name} | {user.email} | {user.age}</span>
+            <div>
+              <Button variant="light" size="sm" className='ms-1'>🖊️</Button>
+              <Button variant="danger" size="sm" className='ms-1'>🗑️</Button>
+            </div>
+            
+          </ListGroup.Item>
         ))}
       </ListGroup> 
     </>
@@ -31,8 +42,9 @@ function Users() {
 export default Users;
 
 /**
- Line 1 - We import the ListGroup component from the react-bootstrap library, which we will use to display the list of users in a styled manner.
- Line 2 - We import the useState hook from React, which allows us to manage the state of our component.
+ Line 1 - We import the useState hook from React, which allows us to manage state in a functional component.
+
+ Line 3-4 - We import the ListGroup and Button components from the react-bootstrap library, which we will use to display our list of users and action buttons.
 
  Line 4 - We define a functional component called Users.
 
