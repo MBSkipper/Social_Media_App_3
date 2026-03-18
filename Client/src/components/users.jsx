@@ -29,3 +29,16 @@ function Users() {
 }
 
 export default Users;
+
+/**
+ Line 1 - We import the ListGroup component from the react-bootstrap library, which we will use to display the list of users in a styled manner.
+ Line 2 - We import the useState hook from React, which allows us to manage the state of our component.
+
+ Line 4 - We define a functional component called Users.
+
+ Line 5 - We use the useState hook to create a state variable called users, which is initialized with an array of user objects. Each user object contains a name, email, and age.
+
+ Line 14 - We return a JSX fragment that contains a heading and a ListGroup component.  
+
+ Line 21 - We use the map function to iterate over the users array and render a ListGroup.Item for each user. The variant of the ListGroup.Item is determined by the user's age: if the user is 18 or older, the variant is set to "success" (green), otherwise it is set to "danger" (red). This visually indicates whether the user is an adult or a minor.
+ */
