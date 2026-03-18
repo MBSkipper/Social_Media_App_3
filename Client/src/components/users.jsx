@@ -6,7 +6,7 @@ function Users() {
     { 
       name: 'Anne', 
       email: 'anne@gmail.com',
-      age: 25
+      age: 17
     },
     { 
       name: 'Bob', 
@@ -20,7 +20,8 @@ function Users() {
       <h1 className='display-5'>Users</h1>
       <ListGroup>
         {users.map(user => (
-          <ListGroup.Item>{user.name} | {user.email} | {user.age}</ListGroup.Item>
+          <ListGroup.Item variant={user.age >= 18 ? "success" : "danger"} >
+            {user.name} | {user.email} | {user.age}</ListGroup.Item>
         ))}
       </ListGroup> 
     </>
