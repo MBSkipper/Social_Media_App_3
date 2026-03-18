@@ -1,13 +1,15 @@
 const express = require('express')
 const mongoose = require('mongoose')  
+var cors = require('cors')
 const dotenv = require('dotenv')
 
 dotenv.config() 
 
 const userRoutes = require('./src/routes/user.routes')
 
+/**Middlewares */
 const app = express()
-
+app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/users', userRoutes)

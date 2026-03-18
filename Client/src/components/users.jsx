@@ -1,42 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 
 
 function Users() {
-  const [users, setUsers] = useState([
-    { 
-      name: 'Anne', 
-      email: 'anne@gmail.com',
-      age: 17
-    },
-    { 
-      name: 'Bob', 
-      email: 'bob@gmail.com',
-      age: 30
-    }
-  ])
+  const [users, setUsers] = useState([])
 
-  return (
-    <>
-      <h1 className='display-3'>Users</h1>
-      <ListGroup>
-        {users.map(user => (
-          <ListGroup.Item 
-          className="d-flex justify-content-between align-items-start"
-          variant={user.age >= 18 ? "success" : "warning"} >
-            <span>{user.name} | {user.email} | {user.age}</span>
-            <div>
-              <Button variant="light" size="sm" className='ms-1'>🖊️</Button>
-              <Button variant="danger" size="sm" className='ms-1'>🗑️</Button>
-            </div>
-            
-          </ListGroup.Item>
-        ))}
-      </ListGroup> 
-    </>
-  );
+  useEffect(() => { 
+    fetchUser()
+  }, [])
+
+  async function fetchUser() {
+    try {
+      const res = await fetch('http://localhost:4000/users')
+      const data = await res.json()
+      console.log(data)
+    } catch (error) {
+      console.error('Error while fetching users:', error) 
+    }
+    
+
+    return (
+      <>
+        <h1 className='display-3'>Users</h1>
+        <ListGroup>
+          {users.map(user => (
+            <ListGroup.Item 
+            className="d-flex justify-content-between align-items-start"
+            variant={user.age >= 18 ? "success" : "warning"} >
+              <span>{user.name} | {user.email} | {user.age}</span>
+              <div>
+                <Button variant="light" size="sm" className='ms-1'>🖊️</Button>
+                <Button variant="danger" size="sm" className='ms-1'>🗑️</Button>
+              </div>
+              
+            </ListGroup.Item>
+          ))}
+        </ListGroup> 
+      </>
+    );
+  }
 }
 
 export default Users;
@@ -49,6 +53,35 @@ export default Users;
  Line 4 - We define a functional component called Users.
 
  Line 5 - We use the useState hook to create a state variable called users, which is initialized with an array of user objects. Each user object contains a name, email, and age.
+
+ Original Line 7 onwards - Test data was hardcoded into the users state variable for demonstration purposes. In a real application, this data would likely come from an API call to a backend server. Test data looked like this:
+ 
+ function Users() {
+  const [users, setUsers] = useState([
+    { 
+      name: 'Anne', 
+      email: 'anne@gmail.com',
+      age: 17
+    },
+    { 
+      name: 'Bob', 
+      email: 'bob@gmail.com',
+      age: 30
+    }
+  ])
+ function Users() {
+  const [users, setUsers] = useState([
+    { 
+      name: 'Anne', 
+      email: 'anne@gmail.com',
+      age: 17
+    },
+    { 
+      name: 'Bob', 
+      email: 'bob@gmail.com',
+      age: 30
+    }
+  ])
 
  Line 14 - We return a JSX fragment that contains a heading and a ListGroup component.  
 
