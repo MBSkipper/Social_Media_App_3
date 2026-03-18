@@ -18,8 +18,9 @@ app.get('/', (req, res) => {
 
 mongoose.connect(process.env.MONGODB_URL)
   .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log(`Server is running on port ${process.env.PORT}`)
+    const PORT = process.env.PORT
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://${PORT}`)
     })
   })
 
@@ -50,6 +51,8 @@ Line 15-17 - We define a route for the root URL ('/'). When a GET request is mad
 Line 19 - We use the mongoose.connect() method to establish a connection to the MongoDB database. The connection string is retrieved from the MONGODB_URL environment variable defined in the .env file.
 
 Line 19-24 - We started the server originally by calling app.listen() and specifying the port number (4000) in this code app.listen(4000, () => { }). Once the .env file was set up with the PORT variable (PORT=4000), the server would listen on that port. The callback function is executed once the server is successfully started, and it logs a message to the console indicating that the server is running.
+
+Line 21 - We retrieve the PORT variable from process.env, which contains the environment variables loaded from the .env file. This allows us to use the PORT variable to specify the port number for our server.
 
 
  */
