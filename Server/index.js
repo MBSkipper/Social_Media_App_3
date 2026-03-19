@@ -9,7 +9,10 @@ const userRoutes = require('./src/routes/user.routes')
 
 /**Middlewares */
 const app = express()
-app.use(cors())
+app.use(cors( {
+  origin: process.env.CLIENT_ORIGIN
+}))
+
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/users', userRoutes)
