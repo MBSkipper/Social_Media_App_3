@@ -3,8 +3,15 @@ import { useState, useEffect } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 
-
+/******** */
 function Users() {
+  return <h1>Users works</h1>;
+}
+
+export default Users;
+/********* */
+
+/*function Users() {
   const [users, setUsers] = useState([])
 
   useEffect(() => { 
@@ -14,13 +21,12 @@ function Users() {
   async function fetchUser() {
     try {
       const res = await fetch('http://localhost:4000/users')
-      const data = await res.json()
-      console.log(data)
+      const jsonRes = await res.json()
+      setUsers(jsonRes.data)
     } catch (error) {
       console.error('Error while fetching users:', error) 
     }
     
-
     return (
       <>
         <h1 className='display-3'>Users</h1>
