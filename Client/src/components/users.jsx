@@ -6,13 +6,15 @@ import axios from 'axios';
 function Users() {
   const [users, setUsers] = useState([]);
 
+  const API_DOMAIN = import.meta.env.VITE_API_DOMAIN 
+
   useEffect(() => {
     fetchUser();
   }, []);
 
   async function fetchUser() {
     try {
-      const res = await axios.get('http://localhost:4000/users');
+      const res = await axios.get(API_DOMAIN + '/users');
       setUsers(res.data.data);
     } catch (error) {
       console.error('Error while fetching users:', error);
