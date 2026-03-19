@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';  
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -11,9 +12,8 @@ function Users() {
 
   async function fetchUser() {
     try {
-      const res = await fetch('http://localhost:4000/users');
-      const jsonRes = await res.json();
-      setUsers(jsonRes.data);
+      const res = await axios.get('http://localhost:4000/users');
+      setUsers(res.data.data);
     } catch (error) {
       console.error('Error while fetching users:', error);
     }
