@@ -3,8 +3,8 @@ import './App.css'
 
 import { Container } from 'react-bootstrap';  
 
-import Users from './components/Users.jsx';
-import AddUser from './components/AddUser.jsx';
+import Users from './components/Users';
+import AddUser from './components/AddUser';
 
 function App() {
 
